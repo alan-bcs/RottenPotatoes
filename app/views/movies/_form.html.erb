@@ -18,7 +18,8 @@
 
   <div>
     <%= form.label :rating, style: "display: block" %>
-    <%= form.text_field :rating %>
+    <!-- Mude o text_field para select com as classificações indicativas -->
+    <%= form.select :rating, ['G', 'PG', 'PG-13', 'R', 'NC-17'] %>
   </div>
 
   <div>
@@ -32,6 +33,6 @@
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit "Save Changes" %>
   </div>
 <% end %>

@@ -3,7 +3,19 @@ class MoviesController < ApplicationController
 
   # GET /movies or /movies.json
   def index
-    @movies = Movie.all
+    if params[:sort] == 'title'
+      # Ordena alfabeticamente se o parâmetro sort existir
+      @movies = Movie.order(:title)
+    else
+      @movies = Movie.all
+    end
+  end
+
+  def search_tmdb
+    search_term = params[:search_terms]
+    # Cria a mensagem exata exigida pelo Sad Path do roteiro
+    flash[:notice] = "'#{search_term}' was not found in TMDb."
+    redirect_to movies_path
   end
 
   # GET /movies/1 or /movies/1.json
@@ -25,7 +37,7 @@ class MoviesController < ApplicationController
 
     respond_to do |format|
       if @movie.save
-        format.html { redirect_to @movie, notice: "Movie was successfully created." }
+        format.html { redirect_to movies_path, notice: "Movie was successfully created." }
         format.json { render :show, status: :created, location: @movie }
       else
         format.html { render :new, status: :unprocessable_entity }
